@@ -1,14 +1,21 @@
 import React from 'react';
 import {render} from 'react-dom';
-import css from './styles/home.styl';
-import App from'./App';
+import App from './pages/Main';
 import {Provider} from 'react-redux';
 import {createStore} from 'redux';
 import reducer from './reducers';
 import store from './configureStore';
-
+import { Router, Route, browserHistory,IndexRoute } from 'react-router';
+import Login from './components/Login';
+import Resticted from './pages/App';
+import Reg from './components/Reg';
 render(
   <Provider store = {store}>
-    <App/>
+    <Router history={browserHistory}>
+      <Route path="/" component={App}>
+        <IndexRoute component = {Login}/>
+        <Route path = '/app' component = {Reg}/>
+      </Route>
+    </Router>
   </Provider>
   ,document.getElementById('root'));

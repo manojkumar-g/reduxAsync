@@ -46,5 +46,12 @@ const movieData = (state = {
 
         }
     }
+const registerUser = (state = {
+                                isPosting : false,
+                                successRegistration : false,
+                              },action) => {
+    
+
+}
 const rootReducer = combineReducers({counter,movieName,movieData});
 export default rootReducer;

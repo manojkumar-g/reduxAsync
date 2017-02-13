@@ -1,9 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {increment,decrement,fetchMovieData} from './actions';
-import Counter from './components/Counter';
-import SearchForm from './components/SearchForm';
-import Results from './components/Results';
+import {increment,decrement,fetchMovieData} from '../actions';
+import Counter from '../components/Counter';
+import SearchForm from '../components/SearchForm';
+import Results from '../components/Results';
 let App = (props) =>
     (
       <div className="container">
