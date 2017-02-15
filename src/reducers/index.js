@@ -1,4 +1,4 @@
-import {combineReducers} from 'redux'
+import {combineReducers} from 'redux';
 
 const counter = (state = {count : 0},action) => {
   switch (action.type) {
@@ -49,9 +49,27 @@ const movieData = (state = {
 const registerUser = (state = {
                                 isPosting : false,
                                 successRegistration : false,
+                                username:'guest'
                               },action) => {
-    
+    switch (action.type) {
+      case 'REQUEST_TO_REGISTER':
+        return {
+          ...state,
+          isPosting : true
+        };
+        break;
+      case 'SUCCESS_REGISTER':
+        return{
+          ...state,
+          isPosting :false,
+          successRegistration : true,
+          username:action.username
+        };
+        break;
+      default:
+            return state;
+    }
 
 }
-const rootReducer = combineReducers({counter,movieName,movieData});
+const rootReducer = combineReducers({counter,movieName,movieData,registerUser});
 export default rootReducer;

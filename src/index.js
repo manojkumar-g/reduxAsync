@@ -14,7 +14,8 @@ render(
     <Router history={browserHistory}>
       <Route path="/" component={App}>
         <IndexRoute component = {Login}/>
-        <Route path = '/app' component = {Reg}/>
+        <Route path = '/reg' component = {Reg}/>
+        <Route path = '/app' component = {Resticted}/>
       </Route>
     </Router>
   </Provider>

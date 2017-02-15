@@ -3,7 +3,7 @@ var webpack = require('webpack');
 var express = require('express');
 //var config = require('./webpack.config');
 var config = require('./webpack.config');
-
+import authRouter from './src/app/routes/authentication';
 var app = express();
 var compiler = webpack(config);
 var Session = require('express-session');
@@ -25,7 +25,7 @@ app.use(require('webpack-dev-middleware')(compiler, {
 }));
 
 app.use(require('webpack-hot-middleware')(compiler));
-app.use(bodyParser.urlencoded());
+app.use(bodyParser.json());
 app.use(Session({
   secret:'IAmBatman',
   resave : true,
@@ -38,6 +38,8 @@ app.use(passport.session());
 app.get('/*', function(req, res) {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
+
+app.use('/auth',authRouter);
 
 app.listen(1234, function(err) {
   if (err) {

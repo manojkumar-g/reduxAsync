@@ -40,19 +40,17 @@ export const fetchMovieData = movieName =>
 
   export const requestToRegister = (username) => ({
     type : 'REQUEST_TO_REGISTER',
-    user,
-    password
+    username
   });
   export const successRegistration = (username) => ({
     type : 'SUCCESS_REGISTER',
-    user,
-    password
+    username
   });
 
   export const postRegister = (userData) =>
     dispatch => {
       dispatch(requestToRegister(userData.username));
-      return axios.post('/reg',userData)
-                  .then(dispatch(successRegistration(userData.username)))
-                  .catch(err => {console.log(err);});
+      return axios.post('/auth/register',userData)
+                  .then(res => res.body);
+      ;
     }
