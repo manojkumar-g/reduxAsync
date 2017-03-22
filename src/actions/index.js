@@ -1,5 +1,6 @@
 import fetch from 'isomorphic-fetch';
 import axios from 'axios';
+import {browserHistory} from 'react-router';
 
 export const increment = () => ({
   type:'INCREMENT'
@@ -38,19 +39,63 @@ export const fetchMovieData = movieName =>
 
   }
 
-  export const requestToRegister = (username) => ({
+   const requestToRegister = (username) => ({
     type : 'REQUEST_TO_REGISTER',
     username
   });
-  export const successRegistration = (username) => ({
+   const successRegistration = (username) => ({
     type : 'SUCCESS_REGISTER',
     username
   });
+   const failureRegister = () => ({
+    type : 'FAILURE_REGISTER'
+  });
+   const requestToLogin = () => ({
+    type : 'REQUEST_TO_LOGIN',
+  });
+   const successLogin = (username) => ({
+    type : 'SUCCESS_LOGIN',
+    username
+  });
+   const failureLogin = () => ({
+    type : 'FAILURE_LOGIN'
+  });
+
+  export const postLogin = userData =>
+    dispatch =>{
+      dispatch(requestToLogin());
+      return axios.post('/login',userData)
+                  .then(res => {
+                    if(res.status ===200)
+                      dispatch(successLogin(userData.username));
+                  })
+                  .catch(
+                    err =>{
+                      dispatch(failureLogin())
+                      console.log(err);
+                    }
+                  );
+    }
+
 
   export const postRegister = (userData) =>
     dispatch => {
       dispatch(requestToRegister(userData.username));
-      return axios.post('/auth/register',userData)
-                  .then(res => res.body);
+      return axios.post('/signup',userData)
+                  .then(res => {
+                    if(res.status ===200)
+
+                      dispatch(successRegistration(userData.username));
+                      browserHistory.goBack('/')
+
+
+                  })
+                  .catch(
+                    err =>{
+                      dispatch(failureRegister());
+                      console.log('user Already exists i guess');
+                      console.log(err);
+                    }
+                  );
       ;
     }

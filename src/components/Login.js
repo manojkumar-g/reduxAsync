@@ -11,7 +11,6 @@ export default class Login extends React.Component {
   }
   editValues(e) {
     this.setState({[e.target.name]:e.target.value});
-    console.log(this.state);
   }
   render(){
     return(
