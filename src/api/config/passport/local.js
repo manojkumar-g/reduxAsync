@@ -24,8 +24,8 @@ export const localSignup = new LocalStrategy({passReqToCallback : true},
                                     return done(err);
                                   if(user){
                                     console.log('user Already exits');
-                                    const error = new Error('User already Exists so Fuck off');
-                                    error.name = 'You have already sinned up bitch';
+                                    const error = new Error('User already Exists');
+                                    error.name = 'You have already sinned up';
                                     return done(error);
                                   }
                                   else{
